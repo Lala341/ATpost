@@ -137,7 +137,6 @@ AUTHENTICATION_BACKENDS = {
 
 LOGIN_URL = "/login/auth0"
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "https://atpost.auth0.com/v2/logout?returnTo=http%3A%2F%2F172.24.41.227:8000"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 

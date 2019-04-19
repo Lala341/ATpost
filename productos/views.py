@@ -14,7 +14,7 @@ def index(request):
     ventas= Venta.objects.all()
     jsondata = serializers.serialize('json',ventas)
     context={
-		'results':results,
+		'results':ventas,
 		'jsondata':jsondata,
 	}
     return render(request,template,context)

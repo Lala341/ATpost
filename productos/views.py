@@ -8,6 +8,7 @@ from django.core import serializers
 from django.http import HttpResponse
 import json
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     template='index.html'
@@ -107,3 +108,39 @@ def VentaCreate(request):
     }
 
     return render(request, 'Venta/ventaCreate.html', context)
+
+
+
+
+@login_required
+def dashboard(request):
+    user = request.user
+    auth0user = user.social_auth.get(provider='auth0')
+    userdata = {
+        'user_id': auth0user.uid,
+        'name': user.first_name,
+        'picture': auth0user.extra_data['picture']
+    }
+
+    return render(request, 'dashboard.html', {
+        'auth0User': auth0user,
+        'userdata': json.dumps(userdata, indent=4)
+    })
+
+def logout(request):
+    log_out(request)
+    return_to = urlencode({'returnTo': request.build_absolute_uri('/')})
+    logout_url = 'https://%s/v2/logout?client_id=%s&%s' % \
+                 (settings.SOCIAL_AUTH_AUTH0_DOMAIN, settings.SOCIAL_AUTH_AUTH0_KEY, return_to)
+    return HttpResponseRedirect(logout_url)
+
+def getRole(request):
+    user = request.user
+    auth0user = user.social_auth.get(provider="auth0")
+    accessToken = auth0user.extra_data['access_token']
+    url = "https://isis2503-ivan-alfonso.auth0.com/userinfo"
+    headers = {'authorization': 'Bearer ' + accessToken}
+    resp = requests.get(url, headers=headers)
+    userinfo = resp.json()
+    role= userinfo['https://isis2503-ivan-alfonso:auth0:com/role']
+    return (role)

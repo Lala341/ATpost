@@ -9,6 +9,8 @@ from django.http import HttpResponse
 import json
 # Create your views here.
 from django.contrib.auth.decorators import login_required
+import social_django
+
 
 def index(request):
     template='index.html'

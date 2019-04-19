@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'productos',
     'pwa',
-    'social_django'
+    'social_django',
 ]
 
 MIDDLEWARE = [

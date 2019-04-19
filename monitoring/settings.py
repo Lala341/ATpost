@@ -119,3 +119,33 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile'
+]
+
+# webappexample\settings.py
+
+AUTHENTICATION_BACKENDS = {
+    'productos.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+
+LOGIN_URL = "/login/auth0"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "https://atpost.auth0.com/v2/logout?returnTo=http%3A%2F%2F172.24.41.227:8000"
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static', 'media')
+MEDIA_URL = '/static/media/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)

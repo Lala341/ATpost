@@ -120,6 +120,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'atpost.auth0.com'
 
 SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
